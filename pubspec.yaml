@@ -1,0 +1,14 @@
+name: lab5
+description: Лабораторная работа №5 по дисциплине "Системное программное обеспечение"
+version: 1.0.0
+repository: https://github.com/losica2014/vuz-ssw-lab5
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  args: ^2.7.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.24.0
