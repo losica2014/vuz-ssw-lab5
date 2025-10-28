@@ -20,6 +20,8 @@ class Lexer {
   int _trueLine = 1;
   int _trueColumn = 1;
 
+  static const eof = "EOF";
+
   void parse(String text) {
     _line = _trueLine = 1;
     _column = _trueColumn = 1;
@@ -34,6 +36,7 @@ class Lexer {
         _trueColumn++;
       }
     }
+    process(eof);
     if(_state != LexerState.F && _state != LexerState.H) {
       throw Exception("[$_trueLine:$_trueColumn] Неожиданный конец текста.");
     }
@@ -581,7 +584,7 @@ class Lexer {
   bool _B(String character, [Set<String> exclude = const {}]) {
     return (character.codeUnitAt(0) >= 'A'.runes.single && character.codeUnitAt(0) <= 'Z'.runes.single
     || character.codeUnitAt(0) >= 'a'.runes.single && character.codeUnitAt(0) <= 'z'.runes.single
-    || character == '_') && !exclude.contains(character);
+    || character == '_') && !exclude.contains(character) && character != eof;
   }
 
   /// Ц()
@@ -597,6 +600,6 @@ class Lexer {
   /// Проверяет, является ли символ пробелом или иным незначащим символом.
   // ignore: non_constant_identifier_names
   bool _S(String character) {
-    return character == ' ' || character == '\t' || character == '\n' || character == '\r';
+    return character == ' ' || character == '\t' || character == '\n' || character == '\r' || character == eof;
   }
 }
